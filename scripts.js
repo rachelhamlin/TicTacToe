@@ -57,6 +57,7 @@ tictactoeGame.moveHandler = function () {   // this registers which player is ac
     } else if ( $square.text() !== '' ) {
       alert("Oops! That square is taken.");
     }
+    scope.detectWinner();
   })
 };
 
@@ -69,7 +70,6 @@ tictactoeGame.switchPlayer = function () {  // this highlights the active player
     $('.one').addClass('active');
   }
 };
-
 
 // During game play:
   // Detect if three squares match horizontally, vertically, or diagonally
@@ -87,9 +87,18 @@ tictactoeGame.detectWinner = function () { // this will check for 3 matching tex
   var square8 = $('#8').text();
   var square9 = $('#9').text();
 
-  if ( square1==square2 && square2==square3 ) { return square1; }
-  else if ( square4==square5 && square5==square6 ) { return square4; }
-  else if ( square7==square8 && square8==square9 ) { return square7; }
+  if ( square1==square2 && square2==square3 ) {
+    return square1;
+  } else if ( square4==square5 && square5==square6 ) {
+  return square4;
+  } else if ( square7==square8 && square8==square9 ) {
+  return square7; } else if ( square1==square4 && square4==square7 ) {
+    return square1;
+  } else if ( square2==square5 && square5==square8 ) {
+    return square2;
+  } else if ( square3==square6 && square6==square9 ) {
+    return square3;
+  }
 };
 
 
@@ -104,7 +113,6 @@ tictactoeGame.clearBoard = function () {
 
 tictactoeGame.init =function () {
   this.moveHandler();
-  this.detectWinner();
 }
 
 // ************
