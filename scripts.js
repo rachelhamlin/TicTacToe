@@ -55,8 +55,7 @@ tictactoeGame.moveHandler = function () {   // this registers which player is ac
         $square.append('O');
         $square.addClass('marked o');
       }
-      // turn++;
-      // scope.switchPlayer();
+
     } else if ( ($square.text() !== '') && (gameWon = false) ) {
       alert("Oops! That square is taken.");
     }
@@ -79,6 +78,7 @@ tictactoeGame.moveHandler = function () {   // this registers which player is ac
     scope.switchPlayer();
 
   });
+
 }
 
 tictactoeGame.switchPlayer = function () {  // this highlights the active player on the page (for the user to keep track)
@@ -137,6 +137,8 @@ tictactoeGame.clearBoard = function () {
 // Initalize game
 
 tictactoeGame.init =function () {
+
+
   this.moveHandler();
   this.clearBoard();
 }
