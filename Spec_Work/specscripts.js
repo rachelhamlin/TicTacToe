@@ -3,7 +3,16 @@ var tictactoeGame = {};
 
 // Render the board as 9 divs inside a container div on the page.
 
-// Define active player; render an active player display
+
+// Player constructor. Player needs:
+  // A class for its markers (.markedX or .markedO)
+  //
+
+
+
+
+// Render player display
+
 
 
 // Switch players when a player makes a move
@@ -20,7 +29,8 @@ tictactoeGame.switchPlayer = function () {
 tictactoeGame.playerClickHandler = function () {
   var $markedX = $('<div>X</div>').addClass('marked x');
   var $markedO = $('<div>O</div>').addClass('marked o');
-  $('td').on('click', function (e) {
+  $('.square').on('click', function (e) {
+    e.preventDefault();
     var $square = $(e.target);
     console.log(e.target.id);
     if ($activePlayer = 'player 1') {

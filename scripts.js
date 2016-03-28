@@ -1,0 +1,117 @@
+console.log('hey');
+
+// Object-oriented approach (gave up)
+
+
+// Objects:
+  // The whole game
+  // The players
+  // The board
+  // The rules
+
+
+// Player object constructor
+// var Player = function(id, letter) {
+//   this.id = id;
+//   this.letter = letter;
+// }
+//
+// var playerOne = new Player(one, "X");
+// var playerTwo = new Player(two, "O");
+
+
+// *************
+
+
+// Functional approach
+
+// Game
+
+var tictactoeGame = function() {}
+
+// On click:
+  // register which player clicked
+  // register which square was clicked
+  // render move (x or o depending on player)
+  // alert if slot is taken
+  // incremenet turn counter (to alternate players)
+  // switch player in html/css
+
+var turn = 1;  // this turn counter is used to alternate players (odd numbers = player 1)
+
+tictactoeGame.moveHandler = function () {   // this registers which player is active, appends their piece to the board, then switches the active player
+  var scope = this;
+  $('td').on('click', function(e) {
+    e.preventDefault();
+    var $square = $(e.target);
+    if ( $square.text() == '' ) {
+      if ( (turn%2 !== 0) ) {
+        $square.append('X');
+        $square.addClass('marked x');
+      } else {
+        $square.append('O');
+        $square.addClass('marked o');
+      }
+      turn++;
+      scope.switchPlayer();
+    } else if ( $square.text() !== '' ) {
+      alert("Oops! That square is taken.");
+    }
+  })
+};
+
+tictactoeGame.switchPlayer = function () {  // this highlights the active player on the page (for the user to keep track)
+  if ( (turn%2 == 0) && (turn > 1) ) {
+    $('.one').removeClass('active');
+    $('.two').addClass('active');
+  } else {
+    $('.two').removeClass('active');
+    $('.one').addClass('active');
+  }
+};
+
+
+// During game play:
+  // Detect if three squares match horizontally, vertically, or diagonally
+  // Return the value of the matching squares
+  // Invoke this inside moveHandler?
+
+tictactoeGame.detectWinner = function () { // this will check for 3 matching text values ('x' or 'o') horizontally, vertically & diagonally and return the text value if there is a match
+  var square1 = $('#1').text();
+  var square2 = $('#2').text();
+  var square3 = $('#3').text();
+  var square4 = $('#4').text();
+  var square5 = $('#5').text();
+  var square6 = $('#6').text();
+  var square7 = $('#7').text();
+  var square8 = $('#8').text();
+  var square9 = $('#9').text();
+
+  if ( square1==square2 && square2==square3 ) { return square1; }
+  else if ( square4==square5 && square5==square6 ) { return square4; }
+  else if ( square7==square8 && square8==square9 ) { return square7; }
+};
+
+
+// Clear board and start new game (turn count = 1)
+
+tictactoeGame.clearBoard = function () {
+
+}
+
+
+// Initalize game
+
+tictactoeGame.init =function () {
+  this.moveHandler();
+  this.detectWinner();
+}
+
+// ************
+
+
+$(function() {
+
+tictactoeGame.init();
+
+});
