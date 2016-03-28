@@ -47,7 +47,7 @@ tictactoeGame.moveHandler = function () {   // this registers which player is ac
   $('td').on('click', function(e) {
     e.preventDefault();
     var $square = $(e.target);
-    if ( ($square.text() == '') && gameWon ) {
+    if ( ($square.text() == '') && (gameWon == false) ) {
       if ( (turn%2 !== 0) ) {
         $square.append('X');
         $square.addClass('marked x');
@@ -62,24 +62,28 @@ tictactoeGame.moveHandler = function () {   // this registers which player is ac
     }
 
     turn++;
-    if (turn === 10) {
+    if ( (turn === 10) && (gameWon == false) ) {
       alert("It's a tie!");
     }
 
-    scope.switchPlayer();
-
     scope.detectWinner();
-    if (winner == 'X') {
+    if ( (winner == 'X') && (gameWon == false) ) {
       alert('Player one wins the game!');
-    } else if (winner == 'O') {
+      gameWon = true;
+    } else if (winner == 'O' && (gameWon == false) ) {
       alert('Player two wins the game!');
+      gameWon = true;
     }
+
+    scope.switchPlayer();
 
   });
 }
 
 tictactoeGame.switchPlayer = function () {  // this highlights the active player on the page (for the user to keep track)
-  if ( (turn%2 == 0) && (turn > 1) ) {
+  if (gameWon == true) {
+    return;
+  } else if ( (turn%2 == 0) && (turn > 1) ) {
     $('.one').removeClass('active');
     $('.two').addClass('active');
   } else {
