@@ -57,13 +57,14 @@ tictactoeGame.moveHandler = function () {   // this registers which player is ac
       }
       // turn++;
       // scope.switchPlayer();
-    } else if ( $square.text() !== '' ) {
+    } else if ( ($square.text() !== '') && (gameWon = false) ) {
       alert("Oops! That square is taken.");
     }
 
     turn++;
     if ( (turn === 10) && (gameWon == false) ) {
       alert("It's a tie!");
+      gameWon = true;
     }
 
     scope.detectWinner();
@@ -128,10 +129,10 @@ tictactoeGame.clearBoard = function () {
   $('#refresh').on('click', function() {
     $('td.square').empty();
     turn = 1;
+    gameWon = false;
     scope.switchPlayer();
   })
 };
-
 
 // Initalize game
 
