@@ -75,6 +75,7 @@ td:hover {
 
 td:not(:empty):hover {
   background-color: lightgray;
+  cursor: default;
 }
 
 td.t {
@@ -100,9 +101,9 @@ td.marked {
 }
 
 td.marked.x {
-  color: red;
+  color: #3FBFBF;
 }
 
 td.marked.o {
-  color: blue;
+  color: #7FBF3F;
 }

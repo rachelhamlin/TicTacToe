@@ -38,13 +38,16 @@ var tictactoeGame = function() {}
   // switch player in html/css
 
 var turn = 1;  // this turn counter is used to alternate players (odd numbers = player 1)
+var winner;
+var gameWon = false;
+
 
 tictactoeGame.moveHandler = function () {   // this registers which player is active, appends their piece to the board, then switches the active player
   var scope = this;
   $('td').on('click', function(e) {
     e.preventDefault();
     var $square = $(e.target);
-    if ( $square.text() == '' ) {
+    if ( ($square.text() == '') && gameWon ) {
       if ( (turn%2 !== 0) ) {
         $square.append('X');
         $square.addClass('marked x');
@@ -52,14 +55,28 @@ tictactoeGame.moveHandler = function () {   // this registers which player is ac
         $square.append('O');
         $square.addClass('marked o');
       }
-      turn++;
-      scope.switchPlayer();
+      // turn++;
+      // scope.switchPlayer();
     } else if ( $square.text() !== '' ) {
       alert("Oops! That square is taken.");
     }
+
+    turn++;
+    if (turn === 10) {
+      alert("It's a tie!");
+    }
+
+    scope.switchPlayer();
+
     scope.detectWinner();
-  })
-};
+    if (winner == 'X') {
+      alert('Player one wins the game!');
+    } else if (winner == 'O') {
+      alert('Player two wins the game!');
+    }
+
+  });
+}
 
 tictactoeGame.switchPlayer = function () {  // this highlights the active player on the page (for the user to keep track)
   if ( (turn%2 == 0) && (turn > 1) ) {
@@ -87,32 +104,36 @@ tictactoeGame.detectWinner = function () { // this will check for 3 matching tex
   var square8 = $('#8').text();
   var square9 = $('#9').text();
 
-  if ( square1==square2 && square2==square3 ) {
-    return square1;
-  } else if ( square4==square5 && square5==square6 ) {
-  return square4;
-  } else if ( square7==square8 && square8==square9 ) {
-  return square7; } else if ( square1==square4 && square4==square7 ) {
-    return square1;
-  } else if ( square2==square5 && square5==square8 ) {
-    return square2;
-  } else if ( square3==square6 && square6==square9 ) {
-    return square3;
-  }
+  if ( (square1==square2) && (square2==square3) ) { winner = square1; }
+  else if ( (square4==square5) && (square5==square6) ) { winner = square4; }
+  else if ( (square7==square8) && (square8==square9) ) { winner = square7; }
+
+  else if ( (square1==square4) && (square4==square7) ) { winner = square1; }
+  else if ( (square2==square5) && (square5==square8) ) { winner = square2; }
+  else if ( (square3==square6) && (square6==square9) ) { winner = square3; }
+
+  else if ( (square1==square5) && (square5==square9) ) { winner = square1; }
+  else if ( (square3==square5) && (square5==square7) ) { winner = square3; }
 };
 
 
 // Clear board and start new game (turn count = 1)
 
 tictactoeGame.clearBoard = function () {
-
-}
+  var scope = this;
+  $('#refresh').on('click', function() {
+    $('td.square').empty();
+    turn = 1;
+    scope.switchPlayer();
+  })
+};
 
 
 // Initalize game
 
 tictactoeGame.init =function () {
   this.moveHandler();
+  this.clearBoard();
 }
 
 // ************
