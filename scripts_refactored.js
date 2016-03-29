@@ -37,6 +37,7 @@ tictactoeGame.renderMove = function (square) {   // this adds an X or an O to th
     }
   } else if ( (square.text() !== '') && (gameWon == false) ) {
     alert("Oops! That square is taken.");
+    turn--;
   }
 };
 
