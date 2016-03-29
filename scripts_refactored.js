@@ -37,6 +37,7 @@ tictactoeGame.renderMove = function (square) {   // this adds an X or an O to th
     }
   } else if ( (square.text() !== '') && (gameWon == false) ) {
     alert("Oops! That square is taken.");
+    turn--;
   }
 };
 
@@ -82,10 +83,8 @@ tictactoeGame.detectGameWon = function () { // this will check for 3 matching te
   var square8 = $('#8').text();
   var square9 = $('#9').text();
 
-  if ( (turn == 10) && (gameWon == false) ) { alert("It's a tie!"); gameWon = true; }
-
   // check rows
-  else if ( (square1 !== '') && (square1==square2) && (square2==square3) ) { winner = square1; gameWon = true; }
+  if ( (square1 !== '') && (square1==square2) && (square2==square3) ) { winner = square1; gameWon = true; }
   else if ( (square4 !== '') && (square4==square5) && (square5==square6) ) { winner = square4; gameWon = true; }
   else if ( (square7 !== '') && (square7==square8) && (square8==square9) ) { winner = square7; gameWon = true; }
 
