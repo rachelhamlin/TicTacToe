@@ -1,33 +1,6 @@
 console.log('hey');
 
-// Object-oriented approach (gave up)
-
-
-// Objects:
-  // The whole game
-  // The players
-  // The board
-  // The rules
-
-
-// Player object constructor
-// var Player = function(id, letter) {
-//   this.id = id;
-//   this.letter = letter;
-// }
-//
-// var playerOne = new Player(one, "X");
-// var playerTwo = new Player(two, "O");
-
-
-// *************
-
-
-// Functional approach
-
-// Game
-
-var tictactoeGame = function() {}
+var tictactoeGame = function() {} // holds all of the game's objects
 
 // On click:
   // register which player clicked
@@ -38,8 +11,8 @@ var tictactoeGame = function() {}
   // switch player in html/css
 
 var turn = 1;  // this turn counter is used to alternate players (odd numbers = player 1)
-var winner;
-var gameWon = false;
+var winner; // this is used to hold the text value of the winner (X or O) as an output of the detectWinner function
+var gameWon = false; // this variable is used to stop or continue the game's onclick functions depending on whether a player has won
 
 
 tictactoeGame.moveHandler = function () {   // this registers which player is active, appends their piece to the board, then switches the active player
@@ -56,7 +29,7 @@ tictactoeGame.moveHandler = function () {   // this registers which player is ac
         $square.addClass('marked o');
       }
 
-    } else if ( ($square.text() !== '') && (gameWon = false) ) {
+    } else if ( ($square.text() !== '') && (gameWon == false) ) {
       alert("Oops! That square is taken.");
     }
 
@@ -127,7 +100,7 @@ tictactoeGame.detectWinner = function () { // this will check for 3 matching tex
 tictactoeGame.clearBoard = function () {
   var scope = this;
   $('#refresh').on('click', function() {
-    $('td.square').empty();
+    $('td').empty();
     turn = 1;
     gameWon = false;
     scope.switchPlayer();
