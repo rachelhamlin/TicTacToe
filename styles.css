@@ -31,6 +31,10 @@ div.player.active {
   background: yellow;
 }
 
+div.player.active > img {
+  display: flex;
+}
+
 img {
   position: absolute;
   width: 100%;
