@@ -31,12 +31,16 @@ div.player.active {
   background: yellow;
 }
 
+div.player.active > img {
+  display: flex;
+}
+
 img {
   position: absolute;
+  display: none;
   width: 100%;
-  z-index: -1;
   left: 0;
-  top: 0;
+  top: -10%;
 }
 
 h4 {
