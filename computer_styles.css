@@ -1,15 +1,36 @@
 body {
   font-family: 'Amatic SC', cursive;
+  text-align: center;
 }
 
 h1 {
   text-align: center;
   font-size: 3rem;
   display: block;
+  margin-bottom: 0;
+  padding: 0;
+  z-index: 1;
+}
+
+h2 {
+  position: absolute;
+  font-family: 'Lobster', cursive;
+  color: #DAA520;
+  -ms-transform: rotate(20deg); /* IE 9 */
+  -webkit-transform: rotate(20deg); /* Safari */
+  transform: rotate(20deg);
+  z-index: -1;
+  left: 65%;
+}
+
+p {
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 12px;
+  margin-top: 0;
 }
 
 button {
-  display: block;
+  display: inline-block;
   margin: 0 auto;
 }
 
@@ -44,7 +65,7 @@ img {
 }
 
 h4 {
-  margin: 10px 0 0 0;
+  margin: 12px 0 0 0;
 }
 
 div.one {

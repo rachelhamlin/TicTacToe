@@ -15,12 +15,11 @@ tictactoeGame.moveHandler = function (square) {   // this registers which player
       alert("Oops! That square is taken.");
     } else if ( (square.text() == '') && (gameWon == false) ) {
       scope.renderMove(square);
-      setTimeout(scope.randomizeMove, 700);
+      setTimeout(scope.randomizeMove, 800);
       scope.checkGameStatus();
     }
   });
 }
-
 
 tictactoeGame.randomizeMove = function () {   // this generates a move for the computer after the player makes a move
   var emptySquares = $('.square').not('.marked').length;
@@ -51,10 +50,10 @@ tictactoeGame.checkGameStatus = function (turn) {  // this is supposed to check 
 
 tictactoeGame.detectWinner = function (winner) { // this is supposed to detect which player won and alert them
   if (winner == 'X') {
-    alert('Player one wins the game!');
+    alert("You WON!! You're amazing!");
     return;
   } else if (winner == 'O') {
-    alert('Player two wins the game!');
+    alert("The computer won. You can do better.");
     return;
   }
 };
