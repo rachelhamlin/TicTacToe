@@ -86,7 +86,7 @@ tictactoeGame.detectGameWon = function () { // check for 3 matching text values 
   else if ( (square3 !== '') && (square3==square5) && (square5==square7) ) { winner = square3; gameWon = true; }
 
   // check tie
-  else if ( (turn == 10) && (gameWon == false) ) { alert("It's a tie!"); gameWon = true; }
+  else if ( ($('.square.marked').length == 9) && gameWon == false ) { alert("It's a tie!"); winner = ''; gameWon = true}
 
   // else, no winner, game continues
   else { winner = ''; gameWon = false; };
