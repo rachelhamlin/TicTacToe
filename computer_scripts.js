@@ -22,21 +22,8 @@ tictactoeGame.moveHandler = function () {   // this registers which player is ac
 }
 
 tictactoeGame.randomizeMove = function () {   // this generates a move for the computer after the player makes a move
-
-// v1 attempt with recursion
-  // var randomNum = Math.floor(Math.random () * 8);
-  // var randomSquare = $('#sq' + randomNum);
-  // if ( randomSquare.text() == '' ) {
-  //   randomSquare.text('O').addClass('marked o');
-  //   turn++;
-  // } else if ( randomSquare.text() !== '' ) {
-  //     console.log('ruh roh');
-  // }
-
-// v2 attempt using $('.square').not('.marked').length
   var emptySquares = $('.square').not('.marked').length;
   var randomNum = Math.floor(Math.random () * emptySquares);
-  console.log(randomNum);
   var randomSquare = $('.square').not('.marked').eq(randomNum);
   randomSquare.text('O').addClass('marked o');
   turn++;
@@ -53,6 +40,7 @@ tictactoeGame.renderMove = function (square) {   // this adds an X or an O to th
     alert("Oops! That square is taken.");
     turn--;
   }
+  this.switchPlayer();
 };
 
 tictactoeGame.checkGameStatus = function (turn) {  // this is supposed to check if the game has been won and detectWinner if true
@@ -87,15 +75,15 @@ tictactoeGame.switchPlayer = function () {  // this highlights the active player
 // During game play:
 
 tictactoeGame.detectGameWon = function () { // this will check for 3 matching text values ('x' or 'o') horizontally, vertically & diagonally and return the text value if there is a match
-  var square1 = $('#1').text();
-  var square2 = $('#2').text();
-  var square3 = $('#3').text();
-  var square4 = $('#4').text();
-  var square5 = $('#5').text();
-  var square6 = $('#6').text();
-  var square7 = $('#7').text();
-  var square8 = $('#8').text();
-  var square9 = $('#9').text();
+  var square1 = $('#sq0').text();
+  var square2 = $('#sq1').text();
+  var square3 = $('#sq2').text();
+  var square4 = $('#sq3').text();
+  var square5 = $('#sq4').text();
+  var square6 = $('#sq5').text();
+  var square7 = $('#sq6').text();
+  var square8 = $('#sq7').text();
+  var square9 = $('#sq8').text();
 
   if ( (turn == 10) && (gameWon == false) ) { alert("It's a tie!"); winner = ''; gameWon = true; }
   else if ( (square1 !== '') && (square1==square2) && (square2==square3) ) { winner = square1; gameWon = true; }
