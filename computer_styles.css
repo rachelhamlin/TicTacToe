@@ -15,12 +15,13 @@ h1 {
 h2 {
   position: absolute;
   font-family: 'Lobster', cursive;
-  color: #DAA520;
+  color: gold;
   -ms-transform: rotate(20deg); /* IE 9 */
   -webkit-transform: rotate(20deg); /* Safari */
   transform: rotate(20deg);
   z-index: -1;
-  left: 65%;
+  left: 60%;
+  top: 5%;
 }
 
 p {
@@ -30,7 +31,7 @@ p {
 }
 
 button {
-  display: inline-block;
+  display: block;
   margin: 0 auto;
 }
 
