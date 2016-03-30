@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="computer_styles.css"></link>
+    <link href='https://fonts.googleapis.com/css?family=Amatic+SC:400,700' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="computer_scripts.js"></script>
+    <title>Tic Tac Toe</title>
+  </head>
+  <body>
+    <div id='header'><h1>Tic Tac Toe</h1></div>
+    <div id='container'>
+      <div class='player one active'><img src="http://i.imgur.com/mhx1irD.jpg?1"><h4>YOU!</h4></div>
+      <div class='player two'><img src="http://i.imgur.com/mhx1irD.jpg?1"><h4>Computer</h4></div>
+      <table>
+        <tr class='row1'>
+          <td id='sq0' class='square t r check'></td>
+          <td id='sq1' class='square t check'></td>
+          <td id='sq2' class='square t l check'></td>
+        </tr>
+        <tr class='row2'>
+          <td id='sq3' class='square m r check'></td>
+          <td id='sq4' class='square m'></td>
+          <td id='sq5' class='square m l'></td>
+        </tr>
+        <tr class='row3'>
+          <td id='sq6' class='square r check'></td>
+          <td id='sq7' class='square'></td>
+          <td id='sq8' class='square l'></td>
+        </tr>
+      </table>
+    </div>
+    <button id="refresh" type="button">Start new game</button>
+  </body>
+</html>
