@@ -78,8 +78,7 @@ tictactoeGame.detectGameWon = function () { // this will check for 3 matching te
   var square8 = $('#sq7').text();
   var square9 = $('#sq8').text();
 
-  if ( (turn == 10) && (gameWon == false) ) { alert("It's a tie!"); winner = ''; gameWon = true; }
-  else if ( (square1 !== '') && (square1==square2) && (square2==square3) ) { winner = square1; gameWon = true; }
+  if ( (square1 !== '') && (square1==square2) && (square2==square3) ) { winner = square1; gameWon = true; }
   else if ( (square4 !== '') && (square4==square5) && (square5==square6) ) { winner = square4; gameWon = true; }
   else if ( (square7 !== '') && (square7==square8) && (square8==square9) ) { winner = square7; gameWon = true; }
 
@@ -89,6 +88,8 @@ tictactoeGame.detectGameWon = function () { // this will check for 3 matching te
 
   else if ( (square1 !== '') && (square1==square5) && (square5==square9) ) { winner = square1; gameWon = true; }
   else if ( (square3 !== '') && (square3==square5) && (square5==square7) ) { winner = square3; gameWon = true; }
+
+  else if ( (turn == 11) && (gameWon == false) ) { alert("It's a tie!"); winner = ''; gameWon = true; }
 
   else { winner = ''; gameWon = false; };
 };
