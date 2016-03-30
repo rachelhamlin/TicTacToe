@@ -2,14 +2,6 @@ console.log('hey');
 
 var tictactoeGame = function() {} // holds all of the game's objects
 
-// On click:
-  // register which player clicked
-  // register which square was clicked
-  // render move (x or o depending on player)
-  // alert if slot is taken
-  // incremenet turn counter (to alternate players)
-  // switch player in html/css
-
 var turn = 1;  // this turn counter is used to alternate players (odd numbers = player 1)
 var winner; // this is used to hold the text value of the winner (X or O) as an output of the detectWinner function
 var gameWon = false; // this variable is used to stop or continue the game's onclick functions depending on whether a player has won
@@ -61,12 +53,9 @@ tictactoeGame.detectWinner = function (winner) { // this is supposed to detect w
 tictactoeGame.switchPlayer = function () {  // this highlights the active player on the page (for the user to keep track)
   if (gameWon == true) {
     return;
-  } else if ( (turn%2 == 0) && (turn > 1) ) {
-    $('.one').removeClass('active');
-    $('.two').addClass('active');
   } else {
-    $('.two').removeClass('active');
-    $('.one').addClass('active');
+    $('.one').toggleClass('active');
+    $('.two').toggleClass('active');
   }
 };
 

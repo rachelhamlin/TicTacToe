@@ -25,22 +25,36 @@ tictactoeGame.randomizeMove = function () {   // this generates a move for the c
   var emptySquares = $('.square').not('.marked').length;
   var randomNum = Math.floor(Math.random () * emptySquares);
   var randomSquare = $('.square').not('.marked').eq(randomNum);
-  randomSquare.text('O').addClass('marked o');
-  turn++;
+  if (gameWon == false) {
+    randomSquare.text('O').addClass('marked o');
+    turn++;
+    this.switchPlayer();
+  }
 };
 
 tictactoeGame.renderMove = function (square) {   // this adds an X or an O to the board depending on whose move it is
-  if ( (square.text() == '') && (gameWon == false) ) {
+  if ( (square.text() !== '') && (gameWon == false) ) {
+    alert("Oops! That square is taken.");
+    turn--;
+  } else if ( (square.text() == '') && (gameWon == false) ) {
     if ( (turn%2 !== 0) ) {
       square.append('X').addClass('marked x');
     } else {
-      this.randomizeMove();
+      // this.randomizeMove();
     }
-  } else if ( (square.text() !== '') && (gameWon == false) ) {
-    alert("Oops! That square is taken.");
-    turn--;
+    this.switchPlayer();
   }
-  this.switchPlayer();
+  // if ( (square.text() == '') && (gameWon == false) ) {
+  //   if ( (turn%2 !== 0) ) {
+  //     square.append('X').addClass('marked x');
+  //   } else {
+  //     this.randomizeMove();
+  //   }
+  // } else if ( (square.text() !== '') && (gameWon == false) ) {
+  //   alert("Oops! That square is taken.");
+  //   turn--;
+  // }
+  // this.switchPlayer();
 };
 
 tictactoeGame.checkGameStatus = function (turn) {  // this is supposed to check if the game has been won and detectWinner if true
@@ -63,12 +77,9 @@ tictactoeGame.detectWinner = function (winner) { // this is supposed to detect w
 tictactoeGame.switchPlayer = function () {  // this highlights the active player on the page (for the user to keep track)
   if (gameWon == true) {
     return;
-  } else if ( (turn%2 == 0) && (turn > 1) ) {
-    $('.one').removeClass('active');
-    $('.two').addClass('active');
   } else {
-    $('.two').removeClass('active');
-    $('.one').addClass('active');
+    $('.one').toggleClass('active');
+    $('.two').toggleClass('active');
   }
 };
 
