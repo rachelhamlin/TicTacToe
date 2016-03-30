@@ -2,11 +2,11 @@ console.log('hey');
 
 var tictactoeGame = function() {} // holds all of the game's objects
 
-var turn = 1;  // this turn counter is used to alternate players (odd numbers = player 1)
-var winner; // this is used to hold the text value of the winner (X or O) as an output of the detectWinner function
-var gameWon = false; // this variable is used to stop or continue the game's onclick functions depending on whether a player has won
+var turn = 1;  // game starts with player one's move. player one is odd; player two is even.
+var winner; // this holds the text value of the winner (X or O) as an output of the detectGameWon function
+var gameWon = false; // this stops or continues the game depending on whether a player has won
 
-tictactoeGame.moveHandler = function () {   // this registers which player is active, appends their piece to the board, then switches the active player
+tictactoeGame.moveHandler = function () {   // this registers which player is active, adds their piece to the board, then switches the active player
   var scope = this;
   $('td').on('click', function(e) {
     e.preventDefault();
@@ -50,7 +50,7 @@ tictactoeGame.detectWinner = function (winner) { // this is supposed to detect w
   }
 };
 
-tictactoeGame.switchPlayer = function () {  // this highlights the active player on the page (for the user to keep track)
+tictactoeGame.switchPlayer = function () {  // this highlights the active player on the page
   if (gameWon == true) {
     return;
   } else {
@@ -60,8 +60,7 @@ tictactoeGame.switchPlayer = function () {  // this highlights the active player
 };
 
 // During game play:
-
-tictactoeGame.detectGameWon = function () { // this will check for 3 matching text values ('x' or 'o') horizontally, vertically & diagonally and return the text value if there is a match
+tictactoeGame.detectGameWon = function () { // check for 3 matching text values ('x' or 'o') horizontally, vertically & diagonally and return the text value if there is a match
   var square1 = $('#1').text();
   var square2 = $('#2').text();
   var square3 = $('#3').text();
@@ -86,14 +85,15 @@ tictactoeGame.detectGameWon = function () { // this will check for 3 matching te
   else if ( (square1 !== '') && (square1==square5) && (square5==square9) ) { winner = square1; gameWon = true; }
   else if ( (square3 !== '') && (square3==square5) && (square5==square7) ) { winner = square3; gameWon = true; }
 
+  // check tie
   else if ( (turn == 10) && (gameWon == false) ) { alert("It's a tie!"); gameWon = true; }
 
+  // else, no winner, game continues
   else { winner = ''; gameWon = false; };
 };
 
 
-// Clear board and start new game
-
+// Clear board and start new game when button is clicked
 tictactoeGame.clearBoard = function () {
   var scope = this;
   $('#refresh').on('click', function() {
