@@ -21,18 +21,25 @@ tictactoeGame.moveHandler = function () {   // this registers which player is ac
   });
 }
 
-tictactoeGame.randomizeMove = function () {
-  var randomNum = Math.floor(Math.random () * 8);
+tictactoeGame.randomizeMove = function () {   // this generates a move for the computer after the player makes a move
+
+// v1 attempt with recursion
+  // var randomNum = Math.floor(Math.random () * 8);
+  // var randomSquare = $('#sq' + randomNum);
+  // if ( randomSquare.text() == '' ) {
+  //   randomSquare.text('O').addClass('marked o');
+  //   turn++;
+  // } else if ( randomSquare.text() !== '' ) {
+  //     console.log('ruh roh');
+  // }
+
+// v2 attempt using $('.square').not('.marked').length
+  var emptySquares = $('.square').not('.marked').length;
+  var randomNum = Math.floor(Math.random () * emptySquares);
   console.log(randomNum);
-  var randomSquare = $.find('#sq' + randomNum);
-  console.log(randomSquare);
-  if (randomSquare.text() == '') {
-    randomSquare.append('O').addClass('marked o');
-    turn++;
-  } else {
-    randomizeMove();
-  }
-  console.log(randomSquare);
+  var randomSquare = $('.square').not('.marked').eq(randomNum);
+  randomSquare.text('O').addClass('marked o');
+  turn++;
 };
 
 tictactoeGame.renderMove = function (square) {   // this adds an X or an O to the board depending on whose move it is
@@ -41,7 +48,6 @@ tictactoeGame.renderMove = function (square) {   // this adds an X or an O to th
       square.append('X').addClass('marked x');
     } else {
       this.randomizeMove();
-      // randomSquare.append('O').addClass('marked o');
     }
   } else if ( (square.text() !== '') && (gameWon == false) ) {
     alert("Oops! That square is taken.");
