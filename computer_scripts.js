@@ -5,19 +5,23 @@ var tictactoeGame = function() {} // holds all of the game's objects
 var turn = 1;  // this turn counter is used to alternate players (odd numbers = player 1)
 var winner; // this is used to hold the text value of the winner (X or O) as an output of the detectWinner function
 var gameWon = false; // this variable is used to stop or continue the game's onclick functions depending on whether a player has won
+var hold = false;
 
-tictactoeGame.moveHandler = function () {   // this registers which player is active, appends their piece to the board, then switches the active player
+tictactoeGame.moveHandler = function (square) {   // this registers which player is active, appends their piece to the board, then switches the active player
   var scope = this;
   $('td').on('click', function(e) {
     e.preventDefault();
-      if (gameWon == false) {
-        var square = $(e.target);
-        scope.renderMove(square);
-        turn++;
-        scope.checkGameStatus();
-        scope.randomizeMove();
-        scope.switchPlayer();
-      }
+    var square = $(e.target);
+    if ( (square.text() !== '') && (gameWon == false) ) {
+      alert("Oops! That square is taken.");
+      turn--;
+    } else if ( (square.text() == '') && (gameWon == false) ) {
+      scope.renderMove(square);
+      turn++;
+      scope.checkGameStatus();
+      setTimeout(scope.randomizeMove, 800);
+      scope.switchPlayer();
+    }
   });
 }
 
@@ -25,36 +29,14 @@ tictactoeGame.randomizeMove = function () {   // this generates a move for the c
   var emptySquares = $('.square').not('.marked').length;
   var randomNum = Math.floor(Math.random () * emptySquares);
   var randomSquare = $('.square').not('.marked').eq(randomNum);
-  if (gameWon == false) {
+  if ( (gameWon == false) && (hold == false) ) {
     randomSquare.text('O').addClass('marked o');
     turn++;
-    this.switchPlayer();
   }
 };
 
 tictactoeGame.renderMove = function (square) {   // this adds an X or an O to the board depending on whose move it is
-  if ( (square.text() !== '') && (gameWon == false) ) {
-    alert("Oops! That square is taken.");
-    turn--;
-  } else if ( (square.text() == '') && (gameWon == false) ) {
-    if ( (turn%2 !== 0) ) {
-      square.append('X').addClass('marked x');
-    } else {
-      // this.randomizeMove();
-    }
-    this.switchPlayer();
-  }
-  // if ( (square.text() == '') && (gameWon == false) ) {
-  //   if ( (turn%2 !== 0) ) {
-  //     square.append('X').addClass('marked x');
-  //   } else {
-  //     this.randomizeMove();
-  //   }
-  // } else if ( (square.text() !== '') && (gameWon == false) ) {
-  //   alert("Oops! That square is taken.");
-  //   turn--;
-  // }
-  // this.switchPlayer();
+    square.append('X').addClass('marked x');
 };
 
 tictactoeGame.checkGameStatus = function (turn) {  // this is supposed to check if the game has been won and detectWinner if true
