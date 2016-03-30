@@ -5,7 +5,8 @@ var tictactoeGame = function() {} // holds all of the game's objects
 var turn = 1;  // this turn counter is used to alternate players (odd numbers = player 1)
 var winner; // this is used to hold the text value of the winner (X or O) as an output of the detectWinner function
 var gameWon = false; // this variable is used to stop or continue the game's onclick functions depending on whether a player has won
-var hold = false;
+// var hold = false;
+var playerOneTurn = true;
 
 tictactoeGame.moveHandler = function (square) {   // this registers which player is active, appends their piece to the board, then switches the active player
   var scope = this;
@@ -19,8 +20,9 @@ tictactoeGame.moveHandler = function (square) {   // this registers which player
       scope.renderMove(square);
       turn++;
       scope.checkGameStatus();
-      setTimeout(scope.randomizeMove, 800);
+      setTimeout(scope.randomizeMove, 600);
       scope.switchPlayer();
+      console.log('hello?');
     }
   });
 }
@@ -29,14 +31,20 @@ tictactoeGame.randomizeMove = function () {   // this generates a move for the c
   var emptySquares = $('.square').not('.marked').length;
   var randomNum = Math.floor(Math.random () * emptySquares);
   var randomSquare = $('.square').not('.marked').eq(randomNum);
-  if ( (gameWon == false) && (hold == false) ) {
+  if ( (gameWon == false) && (playerOneTurn == false) ) {
     randomSquare.text('O').addClass('marked o');
     turn++;
+    playerOneTurn = true;
+    // this.switchPlayer();
   }
 };
 
 tictactoeGame.renderMove = function (square) {   // this adds an X or an O to the board depending on whose move it is
+  if (playerOneTurn == true) {
     square.append('X').addClass('marked x');
+    playerOneTurn = false;
+    // this.switchPlayer();
+  }
 };
 
 tictactoeGame.checkGameStatus = function (turn) {  // this is supposed to check if the game has been won and detectWinner if true
