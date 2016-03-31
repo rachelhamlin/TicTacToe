@@ -2,66 +2,65 @@ console.log('hey');
 
 var tictactoeGame = function() {} // holds all of the game's objects
 
-var turn = 1;  // game starts with player one's move. player one is odd; player two is even.
-var winner; // this holds the text value of the winner (X or O) as an output of the detectGameWon function
-var gameWon = false; // this stops or continues the game depending on whether a player has won
+var turn = 1;  // odd numbers represent player 1; even represent player 2
+var winner = null; // holds text value ('X' or 'O') as an output of the detectGameWon function
+var gameWon = false; // stops or continues the game depending on whether a player has won
 
-tictactoeGame.moveHandler = function () {   // this registers which player is active, adds their piece to the board, then switches the active player
+tictactoeGame.moveHandler = function () {   // registers active player, renders move, switches player
   var scope = this;
-  $('td').on('click', function(e) {
+  $('td').on('click', function(e) {  // on every click...
     e.preventDefault();
-      if (gameWon == false) {
+      if (gameWon == false) {  // if the game has not ended
         var square = $(e.target);
-        scope.renderMove(square);
-        turn++;
-        scope.checkGameStatus();
-        scope.switchPlayer();
+        scope.renderMove(square); // render a move on the square that's been clicked
+        turn++;                 // add 1 to the turn counter
+        scope.checkGameStatus(); // check to see if there is a winner
+        scope.switchPlayer(); // switch the active player display in the HTML/CSS
       }
   });
 }
 
-tictactoeGame.renderMove = function (square) {   // this adds an X or an O to the board depending on whose move it is
-  if ( (square.text() == '') && (gameWon == false) ) {
-    if ( (turn%2 !== 0) ) {
-      square.append('X').addClass('marked x');
-    } else {
-      square.append('O').addClass('marked o');
+tictactoeGame.renderMove = function (square) {   // renders an X or an O on the board depending on active player
+  if ( (square.text() == '') && (gameWon == false) ) {  // if the chosen square is empty and the game is still on...
+    if ( (turn%2 !== 0) ) {                         // and the active player is odd (player 1)
+      square.append('X').addClass('marked x');    // add an X to the board
+    } else {                                      // if the active player is even (player 2)
+      square.append('O').addClass('marked o');  // add an O to the board
     }
-  } else if ( (square.text() !== '') && (gameWon == false) ) {
-    alert("Oops! That square is taken.");
-    turn--;
+  } else if ( (square.text() !== '') && (gameWon == false) ) { // if the chosen square is full and the game is still on
+    alert("Oops! That square is taken.");             // let the player know to choose a new one
+    turn--;                                           // subtract the turn that was just added (same player is active)
   }
 };
 
-tictactoeGame.checkGameStatus = function (turn) {  // this is supposed to check if the game has been won and detectWinner if true
-  this.detectGameWon();
-    if (gameWon == true && ((winner == 'X') || (winner == 'O')) ) {
-      this.detectWinner(winner);
+tictactoeGame.checkGameStatus = function (turn) {  // this checks to see if the game has been won
+  this.detectGameWon();                           // see line 62
+    if (gameWon == true && ((winner == 'X') || (winner == 'O')) ) {  // if the game has been won
+      this.detectWinner(winner);                                     // get the winner
     }
 };
 
-tictactoeGame.detectWinner = function (winner) { // this is supposed to detect which player won and alert them
-  if (winner == 'X') {
-    alert('Player one wins the game!');
+tictactoeGame.detectWinner = function (winner) { // this detects the winning player and alerts them
+  if (winner == 'X') {                          // if var winner = 'X'
+    alert('Player one wins the game!');         // alert player one
     return;
-  } else if (winner == 'O') {
-    alert('Player two wins the game!');
+  } else if (winner == 'O') {                 // if var winner = 'O'
+    alert('Player two wins the game!');       // alert player two
     return;
   }
 };
 
 tictactoeGame.switchPlayer = function () {  // this highlights the active player on the page
-  if (gameWon == true) {
+  if (gameWon == true) {                    // if the game is over, don't do this
     return;
   } else {
-    $('.one').toggleClass('active');
-    $('.two').toggleClass('active');
+    $('.one').toggleClass('active');      // turn "Player 1"'s highlighter on or off
+    $('.two').toggleClass('active');      // turn "Player 2"'s highlighter on or off
   }
 };
 
-// During game play:
 tictactoeGame.detectGameWon = function () { // check for 3 matching text values ('x' or 'o') horizontally, vertically & diagonally and return the text value if there is a match
-  var square1 = $('#1').text();
+  var square1 = $('#1').text();            // assign a variable to each square on the board
   var square2 = $('#2').text();
   var square3 = $('#3').text();
   var square4 = $('#4').text();
@@ -97,16 +96,17 @@ tictactoeGame.detectGameWon = function () { // check for 3 matching text values 
 tictactoeGame.clearBoard = function () {
   var scope = this;
   $('#refresh').on('click', function() {
-    $('td').empty().removeClass('marked x o');
-    turn = 1;
+    $('td').empty().removeClass('marked x o');    // empty all the cells
+    turn = 1;                                     // reset initial game status
     gameWon = false;
-    scope.switchPlayer();
-  })
-};
+    if ($('.two').hasClass('active')) {           // if the game ended with Player 2 highlighted, switch it back
+      scope.switchPlayer();
+    }
+  });
+}
 
 // Initalize game
-
-tictactoeGame.init =function () {
+tictactoeGame.init = function () {
   this.moveHandler();
   this.clearBoard();
 }
@@ -115,7 +115,5 @@ tictactoeGame.init =function () {
 
 
 $(function() {
-
 tictactoeGame.init();
-
 });
