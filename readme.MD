@@ -8,10 +8,10 @@ In this version of the game, users can play against themselves or a friend by al
 The game indicates which player's turn it is by highlighting the appropriate Player on the page. The game alerts the players when it is won or tied.
 
 _**During game play**_
-(https://github.com/rachelhamlin/TicTacToe/blob/master/images/2playerversion.png)
+![Image of game] (https://github.com/rachelhamlin/TicTacToe/blob/master/images/2playerversion.png)
 
 _**When game is won**_
-(https://github.com/rachelhamlin/TicTacToe/blob/master/images/2playerwinner.png)
+![Image of game] (https://github.com/rachelhamlin/TicTacToe/blob/master/images/2playerwinner.png)
 
 #### Functionality
 * Determines which player is active
@@ -31,7 +31,7 @@ In this version of the game, the user can play against the computer. The compute
 makes a totally random move every time, which is kind of funny.
 
 _**During game play**_
-(https://github.com/rachelhamlin/TicTacToe/blob/master/images/computer_version.png)
+![Image of game] (https://github.com/rachelhamlin/TicTacToe/blob/master/images/computer_version.png)
 
 #### Functionality
 * Determines whether the player or the computer is active
